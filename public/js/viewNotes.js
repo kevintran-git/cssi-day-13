@@ -29,9 +29,15 @@ const renderDataAsHtml = (data) => {
 }
 
 const createCard = (note) => {
+    var colors = ['has-background-primary-light',
+'has-background-link-light',
+'has-background-info-light',
+'has-background-success-light',
+'has-background-warning-light',
+'has-background-danger-light'];
     return `
     <div class="column is-one-quarter">
-        <div class="card">
+        <div class="card ${colors[Math.floor(Math.random()*colors.length)]}">
             <header class="card-header">
              <p class="card-header-title">${note.title}</p>
             </header>
@@ -42,3 +48,11 @@ const createCard = (note) => {
     </div>
     `;
 }
+
+document.querySelector("#logoutButton").addEventListener("click", () => {
+    firebase.auth().signOut().then(() => {
+        window.location = "index.html";
+    }).catch((error) => {
+        alert(error);
+    });
+})
