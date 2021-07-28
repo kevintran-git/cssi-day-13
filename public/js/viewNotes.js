@@ -1,6 +1,6 @@
 let googleUserId;
 
-window.onload = event => {
+window.onload = () => {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
             console.log("Signed in as " + user.displayName);
@@ -22,11 +22,33 @@ const getNotes = (userId) => {
 
 const renderDataAsHtml = (data) => {
     let cards = ``;
-    for (let noteItem in data) {
-        const note = data[noteItem];
-        console.log(note, noteItem);
-        cards += createCard(note, noteItem);
+
+    let noteArray = [];
+
+    for(let id in data){
+        noteArray.push({
+            id: id,
+            data: data[id]
+        });
     }
+
+   noteArray.sort((a, b) => {
+        const titleA = a.data.title.toUpperCase();
+        const titleB = b.data.title.toUpperCase();
+
+        let comparison = 0;
+        if (titleA > titleB) {
+            comparison = 1;
+        } else if (titleA < titleB) {
+            comparison = -1;
+        }
+        return comparison;
+    });
+
+    noteArray.forEach(note => {
+        cards += createCard(note.data, note.id);
+    })
+
     document.querySelector("#app").innerHTML = cards;
 }
 
@@ -64,6 +86,7 @@ document.querySelector("#logoutButton").addEventListener("click", () => {
 })
 
 const deleteNote = (noteId) => {
+
     firebase.database().ref(`users/${googleUserId}/${noteId}`).remove();
 }
 
