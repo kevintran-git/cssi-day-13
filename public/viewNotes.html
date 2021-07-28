@@ -16,17 +16,35 @@
     <script defer src="/__/firebase/8.3.1/firebase-auth.js"></script>
     <script defer src="/__/firebase/8.3.1/firebase-database.js"></script>
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
-    <script src="js/viewNotes.js"></script>
 </head>
 
 <body>
+
     <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="navbar-menu">
-            <a class="navbar-item" href="writeNote.html">
-                Add a new note
+        <div class="navbar-brand">
+            <a class="navbar-item">
+                <h2 class="title is-2">
+                    🔥Fire Notes📝
+                </h2>
             </a>
         </div>
+
+        <div class="navbar-menu">
+            <a class="navbar-item" href="writeNote.html">
+                Write a new note
+            </a>
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a id="logoutButton" class="button is-danger">
+                            <strong>Sign Out</strong>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </nav>
+
     <div class="container">
         <div class="section">
             <div class="columns">
@@ -66,6 +84,9 @@
             </div>
         </div>
     </footer>
+
+    <script src="js/viewNotes.js"></script>
+
 </body>
 
 </html>
