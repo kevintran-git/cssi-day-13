@@ -4,7 +4,7 @@ window.onload = event => {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
             console.log("Signed in as " + user.displayName);
-            const googleUserId = user.uid;
+            googleUserId = user.uid;
             getNotes(googleUserId);
         } else {
             window.location = "index.html";
@@ -24,8 +24,8 @@ const renderDataAsHtml = (data) => {
     let cards = ``;
     for (let noteItem in data) {
         const note = data[noteItem];
-        console.log(note, noteId);
-        cards += createCard(note);
+        console.log(note, noteItem);
+        cards += createCard(note, noteItem);
     }
     document.querySelector("#app").innerHTML = cards;
 }
